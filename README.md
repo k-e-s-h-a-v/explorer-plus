@@ -1,42 +1,35 @@
-# File Size & Count VS Code Extension
+# Explorer Plus
 
-Displays file sizes and folder item counts directly in the VS Code Explorer.  
+Displays file sizes, created and modified dates as a seperate view.  
 - Shows the number of files/folders and total size for each folder.
 
 ## Example
 
-![view file size on hover](images/folder_hover.png)
+![file Viewer demo](assets/demo.gif)
 
 ## Features
 
 - **File Size:** See the size of each file in the explorer.
 - **Folder Count:** See the number of files and folders inside each directory.
-- **Folder Size:** See the total size of each folder (excluding ignored folders).
-- **Performance:** Ignores hidden and dependency folders for fast calculations.
+- **Folder Size:** See the total size of each folder.
 
 ## Usage
 
-- Open the Explorer view in VS Code.
-- File sizes and folder counts will appear automatically.
-- Hover over badges/labels for more details.
-
-## Known Issues
-
-- Large folders may take time to calculate size.
-- Folder size next to each folder name is not working.
-- sometimes source control hijacks the badges and tooltip.
+- Open the Explorer plus view in VS Code.
 
 ## Upcoming Features
 
-- Configurable skip folders (e.g., allow users to specify which folders to ignore).
-- File size and date modified on activity bar.
+- Tree in view.
+- Show hide columns.
+- Search files and folders.
+- Number of children inside each folder.
 
 ## Release Notes
 
-### 0.1.0
+### 0.0.1
 
-- Improved badge and tooltip text for files and folders.
-- Smarter pluralization and hiding of zero-counts.
+- seperate view with sort.
+- created and modified.
 
 See [CHANGELOG.md](./CHANGELOG.md) for details.
 

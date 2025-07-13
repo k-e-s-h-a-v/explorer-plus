@@ -43,7 +43,7 @@
     "url": "https://github.com/k-e-s-h-a-v/explorer-plus/issues"
   },
   "homepage": "https://github.com/k-e-s-h-a-v/explorer-plus#readme",
-  "icon": "icons/explorer++.png",
+  "icon": "icons/explorer-plus.png",
   "scripts": {
     "lint": "eslint .",
     "pretest": "npm run lint",
