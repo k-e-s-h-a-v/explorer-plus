@@ -1,0 +1,60 @@
+{
+  "name": "explorer-plus",
+  "displayName": "Explorer++",
+  "description": "Show file sizes and folder in webview",
+  "publisher": "k-e-s-h-a-v",
+  "license": "SEE LICENSE IN LICENSE",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.102.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onView:fileExplorerView"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "fileExplorerSidebar",
+          "title": "File Explorer+",
+          "icon": "$(folder-library)"
+        }
+      ]
+    },
+    "views": {
+      "fileExplorerSidebar": [
+        {
+          "id": "fileExplorerView",
+          "name": "File Explorer+",
+          "type": "webview"
+        }
+      ]
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/k-e-s-h-a-v/explorer-plus.git"
+  },
+  "bugs": {
+    "url": "https://github.com/k-e-s-h-a-v/explorer-plus/issues"
+  },
+  "homepage": "https://github.com/k-e-s-h-a-v/explorer-plus#readme",
+  "icon": "icons/explorer++.png",
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.102.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "eslint": "^9.25.1",
+    "@vscode/test-cli": "^0.0.11",
+    "@vscode/test-electron": "^2.5.2"
+  }
+}
