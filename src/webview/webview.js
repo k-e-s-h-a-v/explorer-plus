@@ -1,64 +1,66 @@
-// src/webview/webview.js
+// This script runs in the webview context
 (function() {
+    // Get a reference to the VS Code API
     const vscode = acquireVsCodeApi();
 
-    // Event listener for search input
-    const searchInput = document.getElementById('search');
-    if (searchInput) {
-        searchInput.oninput = function(e) {
-            vscode.postMessage({ command: 'search', value: e.target.value });
-        };
-    }
-
-    // Event listeners for sort headers
-    const sortByName = document.getElementById('sort-name');
-    if (sortByName) {
-        sortByName.onclick = function() {
-            vscode.postMessage({ command: 'sort', by: 'name' });
-        };
-    }
-
-    const sortBySize = document.getElementById('sort-size');
-    if (sortBySize) {
-        sortBySize.onclick = function() {
-            vscode.postMessage({ command: 'sort', by: 'size' });
-        };
-    }
-
-    const sortByCtime = document.getElementById('sort-ctime');
-    if (sortByCtime) {
-        sortByCtime.onclick = function() {
-            vscode.postMessage({ command: 'sort', by: 'ctime' });
-        };
-    }
-
-    const sortByMtime = document.getElementById('sort-mtime');
-    if (sortByMtime) {
-        sortByMtime.onclick = function() {
-            vscode.postMessage({ command: 'sort', by: 'mtime' });
-        };
-    }
-
-    // Event listeners for rows (folder clicks)
-    Array.from(document.querySelectorAll('tr.row')).forEach(row => {
-        row.onclick = function(e) {
-            const path = row.getAttribute('data-path');
-            // Check if it's a folder icon and not clicking on a button inside the row (though there are none currently)
-            if (row.querySelector('.mdi-folder') && e.target.tagName !== 'BUTTON') {
-                vscode.postMessage({ command: 'openFolder', path });
-            }
-            // Add logic here to open files in VS Code if needed, e.g.,
-            // else if (row.querySelector('.mdi-file-outline')) {
-            //     vscode.postMessage({ command: 'openFile', path });
-            // }
-        };
+    // Event listener for sorting headers
+    document.querySelectorAll('th[id^="sort-"]').forEach(header => {
+        header.addEventListener('click', () => {
+            const sortBy = header.id.replace('sort-', '');
+            // Post a message to the extension to request sorting
+            vscode.postMessage({
+                command: 'sort',
+                by: sortBy
+            });
+        });
     });
 
-    // Event listener for "Go Up" button
-    const upBtn = document.getElementById('goUp');
-    if (upBtn) {
-        upBtn.onclick = function() {
-            vscode.postMessage({ command: 'goUp' });
-        };
+    // Event listener for search input
+    const searchInput = document.getElementById('search-input'); // Changed ID to match HTML
+    if (searchInput) {
+        let searchTimeout;
+        searchInput.addEventListener('keyup', (event) => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                // Post a message to the extension with the search query
+                vscode.postMessage({
+                    command: 'search',
+                    value: event.target.value
+                });
+            }, 300); // Debounce search input
+        });
     }
-})();
+
+    // Event listener for "Go Up" button
+    const goUpButton = document.getElementById('goUp');
+    if (goUpButton) {
+        goUpButton.addEventListener('click', () => {
+            // Post a message to the extension to navigate up
+            vscode.postMessage({
+                command: 'goUp'
+            });
+        });
+    }
+
+    // Event listener for clicking on file/folder rows
+    document.querySelectorAll('tr.row').forEach(row => {
+        row.addEventListener('click', () => {
+            const path = row.dataset.path; // Get the full path from data-path attribute
+            const isFolder = row.classList.contains('folder-row'); // Check if it's a folder
+
+            if (isFolder) {
+                // If it's a folder, send 'openFolder' command
+                vscode.postMessage({
+                    command: 'openFolder',
+                    path: path
+                });
+            } else {
+                // If it's a file, send 'openFile' command
+                vscode.postMessage({
+                    command: 'openFile',
+                    path: path
+                });
+            }
+        });
+    });
+}());

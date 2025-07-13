@@ -1,7 +1,7 @@
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    color: var(--vscode-editorWidget-foreground);
-    font-size: 13px;
+    font-family: var(--vscode-font-family);
+    font-size: var(--vscode-font-size);
+    color: var(--vscode-foreground);
     background-color: var(--vscode-editorGroup-background);
 }
 #search {
@@ -14,13 +14,25 @@ body {
     font-size: 13px;
 }
 #goUp {
-    margin-left: 8px;
-    border: none;
-    background: var(--vscode-button-background);
+    background-color: var(--vscode-button-background);
     color: var(--vscode-button-foreground);
-    border-radius: 4px;
-    padding: 2px 10px;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
     cursor: pointer;
+    margin-left: 8px;
+}
+#goUp:hover {
+    background-color: var(--vscode-button-hoverBackground);
+}
+input[type="search"] {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    background-color: var(--vscode-input-background);
+    color: var(--vscode-input-foreground);
+    border: 1px solid var(--vscode-input-border);
+    border-radius: 3px;
 }
 table {
     width: 100%;
@@ -30,12 +42,14 @@ table {
 th, td {
     padding: 6px;
     text-align: left;
-    border-bottom: 1px solid var(--vscode-list-hoverBackground);
+    border-bottom: 1px solid var(--vscode-editorGroup-border);
 }
 th {
-    background: var(--vscode-editorWidget-background);
     cursor: pointer;
-    font-weight: normal;
+    color: var(--vscode-textLink-foreground);
+}
+th:hover {
+    text-decoration: underline;
 }
 tr.row:hover {
     background-color: var(--vscode-list-hoverBackground);
@@ -45,8 +59,10 @@ tr.row:hover {
     font-size: 16px;
 }
 .current-path {
-    font-size: 12px;
-    color: var(--vscode-descriptionForeground);
-    margin-bottom: 4px;
-    word-break: break-all;
+    flex-grow: 1;
+    font-weight: bold;
+    color: var(--vscode-editor-foreground);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
