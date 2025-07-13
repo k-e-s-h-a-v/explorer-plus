@@ -216,10 +216,9 @@ class FileExplorerViewProvider {
             <body>
                 <div style="padding:0.5em;">
                     <div style="display:flex;align-items:center;margin-bottom:8px;">
-                        <input id="search" type="text" placeholder="Search files..." value="${this.search || ''}">
+                    <div class="current-path">${rootPath}</div>
                         ${showUp ? `<button id="goUp" title="Up">&#8593;</button>` : ''}
                     </div>
-                    <div class="current-path">${rootPath}</div>
                     <table>
                         <thead>
                             <tr>
