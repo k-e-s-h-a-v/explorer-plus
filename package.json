@@ -16,6 +16,177 @@
   ],
   "main": "./extension.js",
   "contributes": {
+    "configuration": {
+      "title": "Explorer+",
+      "properties": {
+        "explorerPlus.showSize": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show file/folder size column"
+        },
+        "explorerPlus.showDateCreated": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show date created column"
+        },
+        "explorerPlus.showDateModified": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show date modified column"
+        },
+        "explorerPlus.dateFormat": {
+          "type": "string",
+          "default": "full",
+          "enum": ["full", "compact", "relative"],
+          "enumDescriptions": [
+            "Full date and time (system locale, e.g. 5/1/2026, 3:14:00 PM)",
+            "Fixed format (e.g. 5/1/26, 15:14)",
+            "Relative (<1yr) / Date (≥1yr) (e.g. 3h ago / Nov 18, 2021)"
+          ],
+          "markdownDescription": "Date/time display format for file dates\n\n- **Full**: system locale date + time (e.g. `5/1/2026, 3:14:00 PM`)\n- **Compact**: fixed format (e.g. `5/1/26, 15:14`)\n- **Relative**: relative time (<1yr) / date (≥1yr) (e.g. `3h ago` / `Nov 18, 2021`)",
+          "order": 10
+        }
+      }
+    },
+"commands": [
+      {
+        "command": "explorerPlus.hideSize",
+        "title": "✓ Size",
+        "category": "Explorer+"
+      },
+      {
+        "command": "explorerPlus.showSize",
+        "title": "Size",
+        "category": "Explorer+"
+      },
+      {
+        "command": "explorerPlus.hideDateCreated",
+        "title": "✓ Created",
+        "category": "Explorer+"
+      },
+      {
+        "command": "explorerPlus.showDateCreated",
+        "title": "Created",
+        "category": "Explorer+"
+      },
+      {
+        "command": "explorerPlus.hideDateModified",
+        "title": "✓ Modified",
+        "category": "Explorer+"
+      },
+      {
+        "command": "explorerPlus.showDateModified",
+        "title": "Modified",
+        "category": "Explorer+"
+      },
+      {
+        "command": "explorerPlus.dateFormatFullActive",
+        "title": "✓ Full",
+        "category": "Explorer+"
+      },
+      {
+        "command": "explorerPlus.dateFormatFull",
+        "title": "Full",
+        "category": "Explorer+"
+      },
+      {
+        "command": "explorerPlus.dateFormatCompactActive",
+        "title": "✓ Compact",
+        "category": "Explorer+"
+      },
+      {
+        "command": "explorerPlus.dateFormatCompact",
+        "title": "Compact",
+        "category": "Explorer+"
+      },
+      {
+        "command": "explorerPlus.dateFormatRelativeActive",
+        "title": "✓ Relative",
+        "category": "Explorer+"
+      },
+      {
+        "command": "explorerPlus.dateFormatRelative",
+        "title": "Relative",
+        "category": "Explorer+"
+      }
+    ],
+    "submenus": [
+      {
+        "id": "explorerPlus.dateFormatSubmenu",
+        "label": "Date Format"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "explorerPlus.hideSize",
+          "when": "view == fileExplorerView && explorerPlus.showSize",
+          "group": "1_settings@1"
+        },
+        {
+          "command": "explorerPlus.showSize",
+          "when": "view == fileExplorerView && !explorerPlus.showSize",
+          "group": "1_settings@1"
+        },
+        {
+          "command": "explorerPlus.hideDateCreated",
+          "when": "view == fileExplorerView && explorerPlus.showDateCreated",
+          "group": "1_settings@2"
+        },
+        {
+          "command": "explorerPlus.showDateCreated",
+          "when": "view == fileExplorerView && !explorerPlus.showDateCreated",
+          "group": "1_settings@2"
+        },
+        {
+          "command": "explorerPlus.hideDateModified",
+          "when": "view == fileExplorerView && explorerPlus.showDateModified",
+          "group": "1_settings@3"
+        },
+        {
+          "command": "explorerPlus.showDateModified",
+          "when": "view == fileExplorerView && !explorerPlus.showDateModified",
+          "group": "1_settings@3"
+        },
+        {
+          "submenu": "explorerPlus.dateFormatSubmenu",
+          "when": "view == fileExplorerView",
+          "group": "2_dateFormat@1"
+        }
+      ],
+      "explorerPlus.dateFormatSubmenu": [
+        {
+          "command": "explorerPlus.dateFormatFullActive",
+          "when": "explorerPlus.dateFormat == full",
+          "group": "dateFormat@1"
+        },
+        {
+          "command": "explorerPlus.dateFormatFull",
+          "when": "explorerPlus.dateFormat != full",
+          "group": "dateFormat@1"
+        },
+        {
+          "command": "explorerPlus.dateFormatCompactActive",
+          "when": "explorerPlus.dateFormat == compact",
+          "group": "dateFormat@2"
+        },
+        {
+          "command": "explorerPlus.dateFormatCompact",
+          "when": "explorerPlus.dateFormat != compact",
+          "group": "dateFormat@2"
+        },
+        {
+          "command": "explorerPlus.dateFormatRelativeActive",
+          "when": "explorerPlus.dateFormat == relative",
+          "group": "dateFormat@3"
+        },
+        {
+          "command": "explorerPlus.dateFormatRelative",
+          "when": "explorerPlus.dateFormat != relative",
+          "group": "dateFormat@3"
+        }
+      ]
+    },
     "viewsContainers": {
       "activitybar": [
         {
